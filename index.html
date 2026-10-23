@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizSprint</title>
+  <!-- Link to external CSS stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- SCREEN 1: INPUT SETUP -->
+    <div id="setup-screen" class="card">
+      <h1>QuizSprint Studio</h1>
+      <p class="subtitle">Convert notes into spoiler-free active recall quizzes instantly.</p>
+
+      <!-- AI Prompt Box -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span>AI Prompt Template for ChatGPT / Gemini</span>
+          <button class="copy-btn" id="copy-btn">Copy Prompt</button>
+        </div>
+        <pre class="prompt-text" id="ai-prompt">Act as an exam quiz creator. Convert my lecture notes into multiple-choice questions. Format them like this with the answer key at the very end:
+
+1. [Question text]
+A) [Option A]
+B) [Option B]
+C) [Option C]
+D) [Option D]
+
+2. [Question text]
+A) [Option A]
+B) [Option B]
+C) [Option C]
+D) [Option D]
+
+ANSWERS:
+1. [Correct Letter]
+2. [Correct Letter]
+
+Rules:
+- Do not include any intro or outro text.
+- Group all correct answers under 'ANSWERS:' at the very bottom so answers are not spoiled.
+
+Here are my lecture notes:
+[PASTE YOUR LECTURE NOTES HERE]</pre>
+      </div>
+
+      <textarea id="quiz-input" placeholder="Paste your formatted questions and answer key here..."></textarea>
+
+      <div class="btn-group">
+        <button class="secondary-btn" id="sample-btn">⚡ Load Sample</button>
+        <button class="primary-btn" id="start-btn">Generate & Start Quiz</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: QUIZ TAKING -->
+    <div id="quiz-screen" class="card hidden">
+      <div class="quiz-header">
+        <span id="progress-text">Question 1 of 5</span>
+        <span id="score-tracker">Score: 0</span>
+      </div>
+
+      <div class="question-title" id="question-text">Question loading...</div>
+
+      <div class="options-grid" id="options-container">
+        <!-- Dynamic buttons via script.js -->
+      </div>
+    </div>
+
+    <!-- SCREEN 3: RESULTS & DATABASE HISTORY -->
+    <div id="result-screen" class="card hidden">
+      <h1>Quiz Complete!</h1>
+      <p class="subtitle">Your attempt performance has been saved to the browser database.</p>
+
+      <div class="score-badge">
+        <div class="score-number" id="final-score">0 / 0</div>
+        <div class="score-percent" id="final-percentage">0% Accuracy</div>
+      </div>
+
+      <!-- NEW DATABASE HISTORY SECTION -->
+      <div class="db-section">
+        <div class="db-header">
+          <h3>📊 Browser Database Attempt Logs (`QuizSprintDB`)</h3>
+          <button class="clear-db-btn" id="clear-db-btn">Clear History</button>
+        </div>
+        <table class="db-table">
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Score</th>
+              <th>Accuracy</th>
+            </tr>
+          </thead>
+          <tbody id="db-history-rows">
+            <!-- Loaded dynamically from IndexedDB -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="breakdown-title">Review Current Attempt:</div>
+      <div id="review-container">
+        <!-- Dynamic review list injected via script.js -->
+      </div>
+
+      <div class="btn-group" style="margin-top: 20px;">
+        <button class="primary-btn" id="reset-btn">Create New Quiz</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Link to external JavaScript logic -->
+  <script src="script.js"></script>
+</body>
+
+</html>
